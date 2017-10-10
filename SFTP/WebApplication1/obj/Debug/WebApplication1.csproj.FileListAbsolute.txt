@@ -1,0 +1,8 @@
+D:\SpreadTrum\SFTP1\SFTP\WebApplication1\bin\WebApplication1.dll.config
+D:\SpreadTrum\SFTP1\SFTP\WebApplication1\bin\WebApplication1.dll
+D:\SpreadTrum\SFTP1\SFTP\WebApplication1\bin\WebApplication1.pdb
+D:\SpreadTrum\SFTP1\SFTP\WebApplication1\bin\Renci.SshNet.dll
+D:\SpreadTrum\SFTP1\SFTP\WebApplication1\bin\Renci.SshNet.xml
+D:\SpreadTrum\SFTP1\SFTP\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+D:\SpreadTrum\SFTP1\SFTP\WebApplication1\obj\Debug\WebApplication1.dll
+D:\SpreadTrum\SFTP1\SFTP\WebApplication1\obj\Debug\WebApplication1.pdb

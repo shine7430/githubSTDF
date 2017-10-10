@@ -1,0 +1,10 @@
+D:\SpreadTrum\SFTP1\SFTP\SFTP\bin\Debug\SFTP.exe.config
+D:\SpreadTrum\SFTP1\SFTP\SFTP\bin\Debug\SFTP.exe
+D:\SpreadTrum\SFTP1\SFTP\SFTP\bin\Debug\SFTP.pdb
+D:\SpreadTrum\SFTP1\SFTP\SFTP\bin\Debug\Renci.SshNet.dll
+D:\SpreadTrum\SFTP1\SFTP\SFTP\bin\Debug\SshNet.Security.Cryptography.dll
+D:\SpreadTrum\SFTP1\SFTP\SFTP\bin\Debug\Renci.SshNet.xml
+D:\SpreadTrum\SFTP1\SFTP\SFTP\bin\Debug\SshNet.Security.Cryptography.xml
+D:\SpreadTrum\SFTP1\SFTP\SFTP\obj\Debug\SFTP.exe
+D:\SpreadTrum\SFTP1\SFTP\SFTP\obj\Debug\SFTP.pdb
+D:\Spreadtrum\SFTP1\SFTP\SFTP\obj\Debug\SFTP.csprojResolveAssemblyReference.cache
