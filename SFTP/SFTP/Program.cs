@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,8 +15,8 @@ namespace SFTP
     {
         const int port = 22; //端口
         const string hostIntel = "ift.intel.com";
-        const string usernameIntel = "jishi"; //用户名
-        const string passwordIntel = "Shi$197712";//密码
+        const string usernameIntel = "jxu16"; //用户名
+        //readonly string passwordIntel = ConfigurationManager.AppSettings["passwordIntel"].ToString(); //"Shi$197712";密码
         const string IntelFT = @"/Samar14/Manufacturing/FinalTest/STDF";
         const string IntelCP = @"/Samar14/Manufacturing/Sort/STDF/";
         const string IntelWAT = @"/Samar14/Manufacturing/WAT/";
@@ -43,6 +44,7 @@ namespace SFTP
             //Console.WriteLine(args[0].ToString());
             //Console.ReadKey();
             //return;
+            string passwordIntel = ConfigurationManager.AppSettings["passwordIntel"].ToString();
             SFTPHelp sftpo = new SFTPHelp(hostIntel, "22", usernameIntel, passwordIntel);
             SFTPHelp sftpoSPRD = new SFTPHelp(hostSPRD, "22", usernameSPRD, passwordSPRD);
 
@@ -54,6 +56,7 @@ namespace SFTP
             ArrayList ALFT = sftpo.GetFileList(IntelFT);
             Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "--FT Files count:" + ALFT.Count);
             Log.Info("", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "--FT Files count:" + ALFT.Count);
+            //return;
             foreach (string filename in ALFT)
             {
                 try
@@ -179,6 +182,7 @@ namespace SFTP
 
         static void CopyFile(string IntelPath, string RouterLocalPath, string SPRDPath, string filename, string ClassName)
         {
+            string passwordIntel = ConfigurationManager.AppSettings["passwordIntel"].ToString();
             SFTPHelp sftpo = new SFTPHelp(hostIntel, "22", usernameIntel, passwordIntel);
             SFTPHelp sftpoSPRD = new SFTPHelp(hostSPRD, "22", usernameSPRD, passwordSPRD);
 
