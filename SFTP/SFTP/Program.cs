@@ -20,7 +20,7 @@ namespace SFTP
         const string IntelFT = @"/Samar14/Manufacturing/FinalTest/STDF";
         const string IntelCP = @"/Samar14/Manufacturing/Sort/STDF/";
         const string IntelWAT = @"/Samar14/Manufacturing/WAT/";
-
+        const string IntelASLT = @"/Samar14/Manufacturing/ASLT/STDF/";
 
         const string hostSPRD = "ftp.spreadtrum.com";
         const string usernameSPRD = "iTest_Intel"; //用户名
@@ -28,10 +28,12 @@ namespace SFTP
         const string SPRDFT = @"/FT/PRODUCTION/TESTER/";
         const string SPRDCP = @"/WS/PRODUCTION/TESTER/";
         const string SPRDWAT = @"/WAT/PRODUCTION/TESTER/";
+        const string SPRDASLT = @"/ASLT/PRODUCTION/TESTER/";
 
         const string RouterFTLocalPath = "C:\\SFTP\\Intel\\FT\\";
         const string RouterCPLocalPath = "C:\\SFTP\\Intel\\CP\\";
         const string RouterWATLocalPath = "C:\\SFTP\\Intel\\WAT\\";
+        const string RouterASLTLocalPath = "C:\\SFTP\\Intel\\ASLT\\";
 
         //@"/FT/DEBUG";//读取、上传文件的目录 "/"为根目录
         //const string uploadfile = @"c:\1.xml"; //上传文件地址
@@ -146,10 +148,10 @@ namespace SFTP
                     sftpo.Get(IntelWAT + "\\" + filename, RouterWATLocalPath + filename);
 
                     //move file from local to spreadtrum sftp
-                    //sftpoSPRD.Put(RouterWATLocalPath + filename, SPRDWAT + filename);
+                    sftpoSPRD.Put(RouterWATLocalPath + filename, SPRDWAT + filename);
 
                     //delete file from intel sftp
-                    //sftpo.Delete(IntelWAT + "\\" + filename);
+                    sftpo.Delete(IntelWAT + "\\" + filename);
 
                     Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-IntelWAT-" + filename + "-Move Successful");
                     Log.Info(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-IntelWAT--" + filename, "IntelWAT--" + filename + "-Move Successful");
@@ -169,6 +171,44 @@ namespace SFTP
             Log.Info("", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "---------------------------End Move WAT File");
             #endregion
 
+            #region ASLT
+            //gototag:
+            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "---------------------------Begin Move ASLT File");
+            Log.Info("", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "---------------------------Begin Move ASLT File");
+            ArrayList ALASLT = sftpo.GetFileList(IntelASLT);
+            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "--ASLT Files count:" + ALASLT.Count);
+            Log.Info("", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-- ASLTFiles count:" + ALASLT.Count);
+
+            foreach (string filename in ALASLT)
+            {
+                try
+                {
+                    //copy file from intel sftp to local
+                    sftpo.Get(IntelASLT + "\\" + filename, RouterASLTLocalPath + filename);
+
+                    //move file from local to spreadtrum sftp
+                    sftpoSPRD.Put(RouterASLTLocalPath + filename, SPRDASLT + filename);
+
+                    //delete file from intel sftp
+                    sftpo.Delete(IntelASLT + "\\" + filename);
+
+                    Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-IntelASLT-" + filename + "-Move Successful");
+                    Log.Info(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-IntelASLT--" + filename, "IntelASLT--" + filename + "-Move Successful");
+
+                    //break;
+                    //Thread t = new Thread(() => CopyFile(IntelWAT, RouterWATLocalPath, SPRDWAT, filename, "IntelWAT"));
+                    //t.IsBackground = true;        //設置為後臺線程,程式關閉后進程也關閉,如果不設置true，則程式關閉,此線程還在內存,不會關閉
+                    //t.Start();  // 在新线程中运行Go()
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-IntelASLT-" + filename + "-Move Failed");
+                    Log.Error("IntelASLT--" + filename, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "--" + ex.Message);
+                }
+            }
+            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "---------------------------End Move WAT File");
+            Log.Info("", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "---------------------------End Move WAT File");
+            #endregion
             //sftpo.Put(@"D:\Plan1.xlsx", workingdirectory + "/Plan1.xlsx");
             //sftpo.Delete(workingdirectory + "/Plan1.xlsx");
 
