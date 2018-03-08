@@ -112,6 +112,29 @@ namespace SFTP
             }
             return result;
         }
+
+        public bool Put(byte[] byt, string remotePath)
+        {
+            bool result = false;
+            try
+            {
+                
+                using (Stream stream = new MemoryStream(byt))
+                {
+                    Connect();
+                    sftp.UploadFile(stream, remotePath, true);
+                    //Disconnect();
+                    result = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                //TxtLog.WriteTxt(CommonMethod.GetProgramName(), string.Format("SFTP文件上传失败，原因：{0}", ex.Message));
+                throw new Exception(string.Format("SFTP文件上传失败，原因：{0}", ex.Message));
+            }
+            return result;
+        }
+
         #endregion
 
         #region SFTP获取文件
@@ -120,6 +143,25 @@ namespace SFTP
         /// </summary>
         /// <param name="remotePath">远程路径</param>
         /// <param name="localPath">本地路径</param>
+        public byte[] Get(string remotePath)
+        {
+            try
+            {
+                Connect();
+                var byt = sftp.ReadAllBytes(remotePath);
+                Console.WriteLine((byt.Length / 1024.00 / 1024.00).ToString("F2") + "M");
+                Log.Info("Size:", (byt.Length / 1024.00 / 1024.00).ToString("F2") + "M");
+                return byt;
+            }
+            catch (Exception ex)
+            {
+                //TxtLog.WriteTxt(CommonMethod.GetProgramName(), string.Format("SFTP文件获取失败，原因：{0}", ex.Message));
+                throw new Exception(string.Format("SFTP文件获取失败，原因：{0}", ex.Message));
+            }
+            return null;
+
+        }
+
         public bool Get(string remotePath, string localPath)
         {
             bool result = false;
@@ -128,6 +170,7 @@ namespace SFTP
                 Connect();
                 var byt = sftp.ReadAllBytes(remotePath);
                 Console.WriteLine((byt.Length / 1024.00 / 1024.00).ToString("F2") + "M");
+                Log.Info("Size:", (byt.Length / 1024.00 / 1024.00).ToString("F2") + "M");
                 //Disconnect();
                 if (!File.Exists(localPath))
                 {

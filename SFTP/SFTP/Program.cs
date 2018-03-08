@@ -63,14 +63,17 @@ namespace SFTP
             {
                 try
                 {
+                    Log.Info(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-IntelFT--" + filename, "IntelFT--" + filename + "-Move Start");
                     //copy file from intel sftp to local
-                    sftpo.Get(IntelFT + "\\" + filename, RouterFTLocalPath + filename);
-
+                    //sftpo.Get(IntelFT + "\\" + filename, RouterFTLocalPath + filename);
+                    
                     //move file from local to spreadtrum sftp
-                    sftpoSPRD.Put(RouterFTLocalPath + filename, SPRDFT + filename);
+                    //sftpoSPRD.Put(RouterFTLocalPath + filename, SPRDFT + filename);
+
+                    sftpoSPRD.Put(sftpo.Get(IntelFT + "\\" + filename), SPRDFT + filename);
 
                     //delete file from intel sftp
-                    sftpo.Delete(IntelFT + "\\" + filename);
+                    //sftpo.Delete(IntelFT + "\\" + filename);
 
                     Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-IntelFT-" + filename + "-Move Successful");
                     Log.Info(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-IntelFT--" + filename, "IntelFT--" + filename + "-Move Successful");
@@ -81,6 +84,7 @@ namespace SFTP
                     Log.Error("IntelFT--" + filename, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "--" + ex.Message);
                 }
 
+                return;
             //    Thread t = new Thread(() => CopyFile(IntelFT, RouterFTLocalPath, SPRDFT, filename, "IntelFT"));
 
             //    t.IsBackground = true;        //設置為後臺線程,程式關閉后進程也關閉,如果不設置true，則程式關閉,此線程還在內存,不會關閉
@@ -102,6 +106,8 @@ namespace SFTP
             {
                 try
                 {
+                    Log.Info(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-IntelCP--" + filename, "IntelCP--" + filename + "-Move Start");
+
                     //copy file from intel sftp to local
                     sftpo.Get(IntelCP + "\\" + filename, RouterCPLocalPath + filename);
 
@@ -144,6 +150,8 @@ namespace SFTP
             {
                 try
                 {
+                    Log.Info(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-IntelWAT--" + filename, "IntelWAT--" + filename + "-Move Start");
+
                     //copy file from intel sftp to local
                     sftpo.Get(IntelWAT + "\\" + filename, RouterWATLocalPath + filename);
 
@@ -183,6 +191,8 @@ namespace SFTP
             {
                 try
                 {
+                    Log.Info(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-IntelASLT--" + filename, "IntelASLT--" + filename + "-Move Start");
+
                     //copy file from intel sftp to local
                     sftpo.Get(IntelASLT + "\\" + filename, RouterASLTLocalPath + filename);
 
