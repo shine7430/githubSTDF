@@ -158,7 +158,8 @@ namespace SFTP
                 //TxtLog.WriteTxt(CommonMethod.GetProgramName(), string.Format("SFTP文件获取失败，原因：{0}", ex.Message));
                 throw new Exception(string.Format("SFTP文件获取失败，原因：{0}", ex.Message));
             }
-            return null;
+            return null;  
+
 
         }
 
