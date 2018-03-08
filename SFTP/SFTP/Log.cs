@@ -13,7 +13,7 @@ namespace SFTP
         /**
          * 向日志文件写入调试信息
          * @param className 类名
-         * @param content 写入内容
+         * @param content 写入内容 
          */
         public static void Debug(string className, string content)
         {
