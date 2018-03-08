@@ -65,15 +65,15 @@ namespace SFTP
                 {
                     Log.Info(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-IntelFT--" + filename, "IntelFT--" + filename + "-Move Start");
                     //copy file from intel sftp to local
-                    //sftpo.Get(IntelFT + "\\" + filename, RouterFTLocalPath + filename);
+                    sftpo.Get(IntelFT + "\\" + filename, RouterFTLocalPath + filename);
                     
                     //move file from local to spreadtrum sftp
-                    //sftpoSPRD.Put(RouterFTLocalPath + filename, SPRDFT + filename);
+                    sftpoSPRD.Put(RouterFTLocalPath + filename, SPRDFT + filename);
 
-                    sftpoSPRD.Put(sftpo.Get(IntelFT + "\\" + filename), SPRDFT + filename);
+                    //sftpoSPRD.Put(sftpo.Get(IntelFT + "\\" + filename), SPRDFT + filename);
 
                     //delete file from intel sftp
-                    //sftpo.Delete(IntelFT + "\\" + filename);
+                    sftpo.Delete(IntelFT + "\\" + filename);
 
                     Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-IntelFT-" + filename + "-Move Successful");
                     Log.Info(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-IntelFT--" + filename, "IntelFT--" + filename + "-Move Successful");
